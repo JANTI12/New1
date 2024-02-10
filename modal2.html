@@ -1,0 +1,192 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+
+  .card1 {
+	padding:10px;
+	margin:10px;
+	}
+	
+  .scroll {
+    overflow: auto;
+  }
+  
+  body {
+      background-image: url('https://foto-net.pl/sklep/obrazki/a9fe20_3328_Lightsphereclear027.jpg');
+      background-size: cover; /* Dostosuj rozmiar obrazu do rozmiaru okna przeglądarki */
+      background-position: center; /* Wyśrodkuj obraz */
+      background-repeat: no-repeat; /* Nie powtarzaj obrazu */
+    }
+	
+  .listaFirm {
+      margin-bottom: 10px;
+      padding: 10px;
+	  margin:10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      font-size: 16px;
+      color: #333;
+	  width:100%;
+	  transition: background-color 0.6s ease;
+	  font-weight:bold;
+    }
+	
+	
+	.modal {
+  position: fixed; 
+  z-index: 9999; 
+  left: 5%;
+  top: 5%;
+  width: 90%; 
+  max-width: 90%;
+  height:85%;  
+  background-color: rgba(2, 2, 255, 0.3); 
+  border-radius: 10px; 
+  border: 2px solid #fff; 
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+  padding: 10px;
+  
+}
+
+	.lista {
+	  padding:10px; 
+	  margin:10px;
+	  border-radius: 10px;
+	  box-shadow: 0 0 10px rgba(0,0,0,1)40%
+	  width:
+	}
+	
+	
+	.elegant-button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #000000; 
+      border: none;
+      border-radius: 5px; /* Zaokrąglone rogi */
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s ease; /* Płynna animacja zmiany koloru tła */
+    }
+	
+	
+</style>
+
+
+<script>
+	function createDivList() {
+		document.getElementById("id01").style.display = "none";
+	  // Tablica z danymi tekstowymi (nazwy firm)
+	  var data = ["Firma 1", "Firma 2", "Firma 3", "Firma 4", "Firma 5"];
+	  var drivers = [['Antoni','Andrzej','Piotr','Krzysztof'],['Łukasz','Gabriel','Julian','Jan', ],[1,2,3,4,5],[3,4,5,6,7],[5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]]
+	  
+	  var container = document.getElementById("id02");
+	  
+	  data.forEach(function(value) {
+		var div = document.createElement("div");
+		div.textContent = value;
+		div.classList.add("listaFirm");
+		div.classList.add("class1");
+		
+		div.addEventListener("click", function() {
+		  //alert("Kliknięto na: " + value);
+		  var divs = document.getElementsByClassName("class1");
+		  for (var i = 0; i < divs.length; i++) {
+			divs[i].style.backgroundColor = ""; 
+		  }
+		  //createDriversList(value);
+		  
+		  for (let i=0; i < data.length; i++){
+			if (value == data[i]){
+			  document.getElementById("id04").textContent = "";
+			  for (let j = 0; j < drivers[i].length; j++){
+				createDriversList(drivers[i][j]);
+			  }
+			}
+		  }
+		  
+		  this.style.backgroundColor = "white"
+		  });
+		  
+		  div.addEventListener("mouseover", function() {
+			this.style.color = "gray";
+		  });
+		  div.addEventListener("mouseout", function() {
+			this.style.color = "black";
+		  });
+		  container.appendChild(div);
+		});
+	}
+	
+	function createDriversList(x){
+		var container = document.getElementById("id04");
+		var image = new Image();
+		image.src = "https://previews.123rf.com/images/stockgiu/stockgiu1710/stockgiu171000233/87383448-avatar-cz%C5%82owiek-g%C5%82owa-do-u%C5%BCytkownika-spo%C5%82ecznego.jpg";
+		image.onload = function() {
+		var aspectRatio = image.width / image.height;
+		if (aspectRatio > 1) {
+		  image.style.width = "20%";
+		  image.style.height = "auto";
+		} else {
+		  image.style.width = "auto";
+		  image.style.height = "20%";
+		}
+	    };
+		container.style.height = window.innerHeight*0.65;
+		//container.textContent = "";
+		var card = document.createElement("div");
+		card.textContent = x;
+		//card.classList.add("w3-card");
+		
+		
+		var combinedContainer = document.createElement("div");
+
+		// Dodaj oba elementy do kontenera
+		combinedContainer.appendChild(image);
+		combinedContainer.appendChild(card);
+		
+		combinedContainer.classList.add("w3-card");
+		combinedContainer.classList.add("w3-row-padding");
+		combinedContainer.classList.add("w3-third");
+		combinedContainer.classList.add("w3-center");
+		combinedContainer.classList.add("w3-white");
+		combinedContainer.classList.add("w3-round");
+		combinedContainer.style.padding = "10px";
+		combinedContainer.style.width = "30%";
+		combinedContainer.style.margin = "1.6%";
+		
+		container.appendChild(combinedContainer);
+		
+		
+	}
+
+window.onload = createDivList;
+
+</script>
+<body style="background-image =https://tabler.io/_next/image?url=%2Fimg%2Ftabler%2Fpreview.png&w=1080&q=85")>
+
+
+<div class="w3-container">
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-button elegant-button">Wyświetl listę kierowców</button>
+
+  <div id="id01" class="">
+    <div class="modal w3-modal-content w3-card-4 w3-animate-zoom">
+    <table class="w3-table">
+		<tr>
+		  <td style="width:35%"><div id="id02" ><h4 class='w3-center'><b>Lista firm obsługujących transport</b></h4><br><br></div></td>
+		  <td style="width:5%"></td>
+		  <td style="width:60%"><div id="id03" ><h4 class='w3-center'><b>Dostępni kierowcy wybranej firmy</b></h4>	<br><br><div id="id04" class="scroll"></div></div></td>
+		</tr>
+		<tr>
+		  
+		</tr>
+	</table>
+    </div>
+	  
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+      </div>
+    </div>
+  </div>
