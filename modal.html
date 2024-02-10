@@ -1,0 +1,109 @@
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Modals - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <!-- CSS files -->
+    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet"/>
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
+	
+	<script>
+		var data = ["firma1", "firma2", "firma3", "firma4", "firma5"]
+		var drivers = [['Kierowca1','kierowca 2','kierowca 3','kierowca 4','kierowca 5'],['Kierowca1','kierowca 2','kierowca 3','kierowca 4','kierowca5','kierowca6'],[1,2,3,4,5],[3,4,5,6,7],[5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]]
+	
+		function v(){
+			if(document.getElementById("form1").value != ""){
+			document.getElementById("driverID").style.display = "block";
+			document.getElementById("driverID2").style.display = "block";
+			for (let i = 0; i < data.length; i++){
+			//alert(document.getElementById("form1").value == data[i]);
+				if (document.getElementById("form1").value == data[i]){
+					document.getElementById("driverID2").textContent = "";
+					for (let j = 0; j < drivers[i].length; j++){
+						var op2 = document.createElement("option");
+						op2.textContent = drivers[i][j];
+						document.getElementById('driverID2').appendChild(op2);
+					}
+				}
+			}
+			} else {
+			alert("Wybierz jedną z podanych")
+			}
+		}
+		function v2(){
+			document.getElementById("driverID").style.display = "none";
+			document.getElementById("driverID2").style.display = "none";
+		}
+		
+		function add(){
+			document.getElementById("form1").textContent = "";
+			for (let i =0; i < data.length; i++){
+				var op = document.createElement("option");
+				op.textContent =data[i];
+				document.getElementById('form1').appendChild(op);
+			}
+		}
+		
+		function print(){
+			console.log(document.getElementById('form1').value);
+			console.log(document.getElementById('driverID2').value);
+		}
+	</script>
+	
+  </head>
+
+<script src="./dist/js/demo-theme.min.js?1684106062"></script>
+
+<a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#modal-team" onclick="add()" onclick="v2()">
+                    Modal with simple form
+                  </a>
+
+<div class="modal modal-blur fade" id="modal-team" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+			<label class="form-label" onclick="add()">Wybierz firmę</label>
+                <select class="form-select" id="form1" >
+					<option  selected></option>
+				</select><br>
+				<button type="button" onclick="v()">Wybierz</button>
+				<br><br>
+				<label class="form-label" style="display:none" id="driverID">Wybierz kierowcę</label>
+                <select class="form-select" style="display:none" id="driverID2" >
+                    <option selected>F1</option>
+                    <option >F2</option>
+                    <option>F3</option>
+				</select>
+				
+				
+            <div class="mb-3">
+              
+
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn me-auto" data-bs-dismiss="modal" onclick="v2()">Close</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  onclick="print()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <!-- Tabler Core -->
+    <script src="./dist/js/tabler.min.js?1684106062" defer></script>
+    <script src="./dist/js/demo.min.js?1684106062" defer></script>
