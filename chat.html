@@ -1,0 +1,228 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+
+<style>
+
+	.chat-window {
+		display:none;
+		width: 360px;
+		background-color: #ffffff;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		padding: 10px;
+		box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	
+
+	/* Wiadomości od użytkownika */
+	.user-message {
+		background-color: #007bff;
+		color:white;
+		margin-left:100%;
+		width:auto;
+		margin:0px;
+		width:contain;
+		margin-right:8px;
+		border-radius:10px;
+		padding: 8px 14px 8px 14px;
+		max-width:200px;
+	}
+
+	/* Wiadomości od innych użytkowników */
+	.other-message {
+		background-color: #efefef;
+		margin:2px;
+		margin-left:6px;
+		border-radius:10px;
+		padding: 8px 14px 8px 14px;
+		max-width:200px;
+	}
+
+	/* Styl dla inputa do wysyłania wiadomości */
+	.message-input {
+		width: calc(100% - 22px);
+		padding: 5px;
+		margin-top: 10px;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+	}
+
+	/* Przycisk do wysyłania wiadomości */
+	.send-button {
+		width: 50px;
+		margin-top: 10px;
+		padding: 5px;
+		color: #000;
+		border: none;
+		border-radius: 3px;
+		cursor: pointer;
+	}
+
+	
+	
+	.chat-header {
+    background-color: #ffffff;
+    color: #000;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+
+
+.close-button {
+    background-color: transparent;
+    border: none;
+    color: #000;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.close-button:hover {
+	animation-name:colorChange;
+	animation-duration:0.3s;
+	font-size:21px;
+	color: #555;
+}
+
+@keyframes colorChange {
+    from { font-size:18px; color:#000 } 
+    to { font-size:21px; color#555 } 
+  }
+
+
+.message-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.message-input {
+    flex: 1;
+    padding: 10px;
+	margin:10px;
+	margin-right:0px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.send-button {
+    padding: 10px 0px;
+	margin:10px;
+	margin-left:0px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.messages {
+	margin-bottom:10px;
+	height:500px;
+    overflow-y: scroll; /* Umożliwia przewijanie, gdy wiadomości wychodzą poza wysokość okna */
+	overflow-x: hidden;
+}
+
+
+	
+
+
+</style>
+
+
+
+<script>
+	function outgoing(){
+		if (document.getElementById("mess").value != ""){
+		var w = document.createElement("div");
+		w.textContent = document.getElementById("mess").value;
+		document.getElementById("mess").value = "";
+		w.classList.add("user-message");
+		var t = document.createElement("table");
+		var t2 = document.createElement("tr");
+		var t3 = document.createElement("td");
+		t3.appendChild(w);
+		t2.appendChild(t3);
+		t.appendChild(t2);
+		t.style.display = "flex";
+		t.style.alignItems = "right";
+		t.style.justifyContent = "right";
+		t.classList.add("w3-animate-right");
+		document.getElementById("messagesBox").appendChild(t);
+		document.getElementById("messagesBox").scrollTop = document.getElementById("messagesBox").scrollHeight;
+		}
+	}
+	
+	function incoming(x){
+		var w = document.createElement("div");
+		w.textContent = x;
+		
+		w.classList.add("other-message");
+		var t = document.createElement("table");
+		var t2 = document.createElement("tr");
+		var t3 = document.createElement("td");
+		t3.appendChild(w);
+		t2.appendChild(t3);
+		t.appendChild(t2);
+		t.classList.add("w3-animate-left");
+		document.getElementById("messagesBox").appendChild(t);
+		document.getElementById("messagesBox").scrollTop = document.getElementById("messagesBox").scrollHeight;
+	}
+	
+	function s(){
+		document.getElementById("windowChat").style.display = "block";
+		document.getElementById("messagesBox").scrollTop = document.getElementById("messagesBox").scrollHeight;
+	}
+	
+	function h(){
+		document.getElementById("windowChat").style.display = "none";
+	}
+	
+	
+	document.addEventListener("DOMContentLoaded", function() {
+    var inputElement = document.getElementById("mess");
+    inputElement.addEventListener("keypress", function(event) {
+        if (event.keyCode === 13) {
+            outgoing();
+        }
+    });
+});
+</script>
+</head>
+<body style="">
+	<button onclick="s()" class="w3-circle w3-padding w3-orange w3-xxlarge w3-display-bottomleft chatbutton w3-card-4" style="margin:30px"><i class="fa-regular fa-comment-dots"></i></button>
+
+	<div class="chat-window w3-animate-zoom" style="margin:10px; padding:0px; margin-left:20px" id="windowChat">
+		<div style="border-bottom: 1px solid #ccc; margin:0px; padding:0px">
+			<div class="chat-header">
+				
+				<div class="" style="">
+					<span style="padding:0px; margin:0px"><b style="color:#444; padding:0px; margin:0px">Name</b> <br><b style="color:#55de55; font-size:10px; margin-left:10px">✔ Active now</b></span>
+				</div>
+				<button class="close-button" onclick="h()" >×</button>		
+			</div>
+		</div>
+		
+		<div class="messages" id="messagesBox">
+			
+		</div>
+		
+		<div class="message-input-container">
+			<input type="text" class="message-input" id="mess" placeholder="Napisz wiadomość...">
+			<button class="send-button" onclick="outgoing()" style="background-color:white; color:#007bff; font-size:23px"><i class="fa-solid fa-paper-plane" ></i></button>
+		</div>
+	</div>
+	
+	<h3 style="color:#ccc">Informations</h1>
+	
+	
+</body>
+</html>
