@@ -1,0 +1,746 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta19
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Data grid - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <!-- CSS files -->
+    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet"/>
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
+	
+	<script>
+		var names = ["Speedy Transport Sp. z o.o.", " Express Logistics Sp. J.","Global Cargo Solutions Ltd.","Mega Logistics Group Sp. k."]
+		var data = [
+		[
+			{ title: "Rok założenia", content: "2002" },
+			{ title: "Obszar działania", content: "Transport krajowy i międzynarodowy" },
+			{ title: "Flota pojazdów", content: "50 ciężarówek o różnej pojemności" },
+			{ title: "Wszyscy kierowcy", content: "20" },
+			{ title: "Dostępni kierowcy", content: "8" },
+			{ title: "Lokalizacja siedziby firmy", content: "Warszawa, Polska" },
+			{ title: "Certyfikaty i licencje", content: "certyfikat ISO 9001:2015" },
+			{ title: "Kontakt", content: "+48 111 222 333 <br> firma@firma.pl" }
+		],[
+			{ title: "Rok założenia", content: "2005" },
+			{ title: "Obszar działania", content: "Transport krajowy i międzynarodowy" },
+			{ title: "Flota pojazdów", content: "45 ciężarówek o różnej pojemności" },
+			{ title: "Wszyscy kierowcy", content: "25" },
+			{ title: "Dostępni kierowcy", content: "10" },
+			{ title: "Lokalizacja siedziby firmy", content: "Kraków, Polska" },
+			{ title: "Certyfikaty i licencje", content: "certyfikat ISO 14001:2015" },
+			{ title: "Kontakt", content: "+48 555 666 777 <br> speedy@transport.pl" }
+		],[
+			{ title: "Rok założenia", content: "2010" },
+			{ title: "Obszar działania", content: "Transport krajowy i międzynarodowy" },
+			{ title: "Flota pojazdów", content: "60 ciężarówek o różnej pojemności" },
+			{ title: "Wszyscy kierowcy", content: "30" },
+			{ title: "Dostępni kierowcy", content: "12" },
+			{ title: "Lokalizacja siedziby firmy", content: "Wrocław, Polska" },
+			{ title: "Certyfikaty i licencje", content: "certyfikat ISO 45001:2018" },
+			{ title: "Kontakt", content: "+48 777 888 999 <br> express@logistics.pl" }
+		],[
+			{ title: "Rok założenia", content: "2008" },
+			{ title: "Obszar działania", content: "Transport krajowy i międzynarodowy" },
+			{ title: "Flota pojazdów", content: "55 ciężarówek o różnej pojemności" },
+			{ title: "Wszyscy kierowcy", content: "28" },
+			{ title: "Dostępni kierowcy", content: "9" },
+			{ title: "Lokalizacja siedziby firmy", content: "Gdańsk, Polska" },
+			{ title: "Certyfikaty i licencje", content: "certyfikat ISO 27001:2013" },
+			{ title: "Kontakt", content: "+48 999 000 111 <br> global@cargo.pl" }
+		]]
+		function createCards(){
+			for (let i = 0; i < names.length; i++){
+				createTransportCompanyCard(names[i], data[i])
+			}
+		}
+	
+		function createTransportCompanyCard(name, dataX) {
+			// Tworzenie głównego kontenera karty
+			var cardContainer = document.createElement("div");
+			cardContainer.classList.add("card", "container-xl");
+			cardContainer.style.marginBottom = "40px";
+
+			// Tworzenie sekcji nagłówka karty
+			var cardHeader = document.createElement("div");
+			cardHeader.classList.add("card-header");
+
+			// Dodawanie tytułu firmy
+			var cardTitle = document.createElement("h3");
+			cardTitle.classList.add("card-title");
+			cardTitle.textContent = name;
+			cardHeader.appendChild(cardTitle);
+
+			// Dodawanie przycisku "Show more"
+			var showMoreButton = document.createElement("button");
+			showMoreButton.textContent = "Show more";
+			showMoreButton.style.backgroundColor = "#3333ee";
+			showMoreButton.style.color = "white";
+			showMoreButton.style.padding = "5px 10px";
+			showMoreButton.style.border = "none";
+			showMoreButton.style.cursor = "pointer";
+			showMoreButton.style.position = "absolute";
+			showMoreButton.style.right = "30px";
+			//showMoreButton.id = name;
+			showMoreButton.onclick = function() {
+				// Tutaj można dodać logikę pokazywania więcej informacji
+				//alert(name);
+				document.getElementById("container").style.display = "none";
+				document.getElementById("tabs").style.display = "block";
+			};
+			cardHeader.appendChild(showMoreButton);
+
+			cardContainer.appendChild(cardHeader);
+
+			// Tworzenie sekcji treści karty
+			var cardBody = document.createElement("div");
+			cardBody.classList.add("card-body");
+
+			// Tworzenie sekcji danych
+			var dataGrid = document.createElement("div");
+			dataGrid.classList.add("datagrid");
+
+			// Dodawanie poszczególnych elementów danych
+			var dataItems = dataX
+
+			dataItems.forEach(function(item) {
+				var dataItem = document.createElement("div");
+				dataItem.classList.add("datagrid-item");
+
+				var dataTitle = document.createElement("div");
+				dataTitle.classList.add("datagrid-title");
+				dataTitle.textContent = item.title;
+
+				var dataContent = document.createElement("div");
+				dataContent.classList.add("datagrid-content");
+				dataContent.innerHTML = item.content;
+
+				dataItem.appendChild(dataTitle);
+				dataItem.appendChild(dataContent);
+
+				dataGrid.appendChild(dataItem);
+			});
+
+			cardBody.appendChild(dataGrid);
+			cardContainer.appendChild(cardBody);
+
+			// Dodanie karty do elementu o id "container" na stronie
+			document.getElementById("container").appendChild(cardContainer);
+}
+
+
+
+	</script>
+	
+  </head>
+  <body onload="createCards()">
+    <script src="./dist/js/demo-theme.min.js?1684106062"></script>
+	
+	
+	
+    <div class="page">
+      <!-- Navbar -->
+            <header class="navbar-expand-md">
+        <div class="collapse navbar-collapse" id="navbar-menu">
+          <div class="navbar">
+            <div class="container-xl">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Home
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" /><path d="M12 12l8 -4.5" /><path d="M12 12l0 9" /><path d="M12 12l-8 -4.5" /><path d="M16 5.25l-8 4.5" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Transport companies
+                    </span>
+                  </a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l3 3l8 -8" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Completed transports
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link " href=""  >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Active transports
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M4 13m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M14 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Customers
+                    </span>
+                  </a>
+                  </li>
+              </ul>
+              <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+                <form action="./" method="get" autocomplete="off" novalidate>
+                  <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+                    </span>
+                    <input type="text" value="" class="form-control" placeholder="Search…" aria-label="Search in website">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="page-wrapper" id="container">
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">
+                  Transport companies
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Page body -->
+        <div class="page-body" >
+        </div>
+      </div>
+	  
+	  
+	  <div class="" id="tabs" style="margin:10px; margin-bottom:100px; display:none	">
+                <!-- Cards with tabs component -->
+                <div class="card-tabs">
+                  <!-- Cards navigation -->
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation"><a href="#tab-top-1" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" >O firmie</a></li>
+                    <li class="nav-item" role="presentation"><a href="#tab-top-2" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">Dostępni kierowcy</a></li>
+                    <li class="nav-item" role="presentation"><a href="#tab-top-3" class="nav-link " data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">Wszyscy kierowcy</a></li>
+                    <li class="nav-item" role="presentation"><a href="#tab-top-4" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">Lista transportów</a></li>
+					<li class="nav-item" role="presentation"><a href="#tab-top-5" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">Faktury</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <!-- Content of card #2 -->
+                    <div id="tab-top-2" class="card tab-pane " role="tabpanel">
+                      <div class="card-body">
+                         <div class="card-body">
+                <div id="table-default" class="table-responsive">
+                  <table class="table border 1px solid gray">
+                    <thead>
+                      <tr>
+                        <th><button class="table-sort desc" data-sort="sort-name">First name</button></th>
+                        <th><button class="table-sort" data-sort="sort-lastname">Last name</button></th>
+                        <th><button class="table-sort" data-sort="sort-car">Car plate</button></th>
+                        <th><button class="table-sort" data-sort="sort-trailer">Trailer plate</button></th>
+                        <th><button class="table-sort" data-sort="sort-phone">Phone number</button></th>
+                        <th><button class="table-sort" data-sort="sort-idcard">ID card</button></th>
+						<th><button class="table-sort" data-sort="sort-status">Status</button></th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-tbody"><tr>
+                        <td class="sort-name">Antoni</td>
+                        <td class="sort-lastname">Janiszewski</td>
+                        <td class="sort-car">KR 57341</td>
+                        <td class="sort-trailer">KR 87687</td>
+                        <td class="sort-phone" data-date="1546016360">543 654 765</td>
+                        <td class="sort-idcard">82342</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+                      </tr>
+					  <tr>
+						<td class="sort-name">Adam</td>
+						<td class="sort-lastname">Nowak</td>
+						<td class="sort-car">WA 12345</td>
+						<td class="sort-trailer">WA 54321</td>
+						<td class="sort-phone" data-date="1546016361">654 321 987</td>
+						<td class="sort-idcard">12345</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Katarzyna</td>
+						<td class="sort-lastname">Kowalska</td>
+						<td class="sort-car">LU 98765</td>
+						<td class="sort-trailer">LU 23456</td>
+						<td class="sort-phone" data-date="1546016362">789 456 123</td>
+						<td class="sort-idcard">67890</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Jan</td>
+						<td class="sort-lastname">Kowalczyk</td>
+						<td class="sort-car">PO 45678</td>
+						<td class="sort-trailer">PO 87654</td>
+						<td class="sort-phone" data-date="1546016363">321 654 987</td>
+						<td class="sort-idcard">45678</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Anna</td>
+						<td class="sort-lastname">Wójcik</td>
+						<td class="sort-car">GD 98765</td>
+						<td class="sort-trailer">GD 23456</td>
+						<td class="sort-phone" data-date="1546016364">987 654 321</td>
+						<td class="sort-idcard">34567</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Piotr</td>
+						<td class="sort-lastname">Lewandowski</td>
+						<td class="sort-car">PO 65432</td>
+						<td class="sort-trailer">PO 23456</td>
+						<td class="sort-phone" data-date="1546016365">456 789 123</td>
+						<td class="sort-idcard">23456</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Maria</td>
+						<td class="sort-lastname">Zielińska</td>
+						<td class="sort-car">LD 54321</td>
+						<td class="sort-trailer">LD 12345</td>
+						<td class="sort-phone" data-date="1546016366">654 987 321</td>
+						<td class="sort-idcard">89012</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Łukasz</td>
+						<td class="sort-lastname">Szymański</td>
+						<td class="sort-car">MZ 23456</td>
+						<td class="sort-trailer">MZ 76543</td>
+						<td class="sort-phone" data-date="1546016367">789 123 456</td>
+						<td class="sort-idcard">34567</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Magdalena</td>
+						<td class="sort-lastname">Dąbrowska</td>
+						<td class="sort-car">PO 76543</td>
+						<td class="sort-trailer">PO 98765</td>
+						<td class="sort-phone" data-date="1546016368">321 456 789</td>
+						<td class="sort-idcard">56789</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Marcin</td>
+						<td class="sort-lastname">Witkowski</td>
+						<td class="sort-car">KI 87654</td>
+						<td class="sort-trailer">KI 54321</td>
+						<td class="sort-phone" data-date="1546016369">987 321 654</td>
+						<td class="sort-idcard">67890</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  
+					<tr>
+						<td class="sort-name">Marcin</td>
+						<td class="sort-lastname">Nowak</td>
+						<td class="sort-car">WI 54321</td>
+						<td class="sort-trailer">WI 98765</td>
+						<td class="sort-phone" data-date="1546016371">123 456 789</td>
+						<td class="sort-idcard">67890</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					
+					<tr>
+						<td class="sort-name">Paweł</td>
+						<td class="sort-lastname">Kamiński</td>
+						<td class="sort-car">PO 76543</td>
+						<td class="sort-trailer">PO 12345</td>
+						<td class="sort-phone" data-date="1546016373">567 890 123</td>
+						<td class="sort-idcard">78901</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					
+					<tr>
+						<td class="sort-name">Mateusz</td>
+						<td class="sort-lastname">Woźniak</td>
+						<td class="sort-car">PO 87654</td>
+						<td class="sort-trailer">PO 54321</td>
+						<td class="sort-phone" data-date="1546016375">678 901 234</td>
+						<td class="sort-idcard">12345</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					
+					<tr>
+						<td class="sort-name">Grzegorz</td>
+						<td class="sort-lastname">Zając</td>
+						<td class="sort-car">PO 43210</td>
+						<td class="sort-trailer">PO 98765</td>
+						<td class="sort-phone" data-date="1546016377">234 567 890</td>
+						<td class="sort-idcard">34567</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					
+					<tr>
+						<td class="sort-name">Michał</td>
+						<td class="sort-lastname">Grabowski</td>
+						<td class="sort-car">KR 98765</td>
+						<td class="sort-trailer">KR 23456</td>
+						<td class="sort-phone" data-date="1546016379">789 012 345</td>
+						<td class="sort-idcard">56789</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					
+					<tr>
+						<td class="sort-name">Tomasz</td>
+						<td class="sort-lastname">Olszewski</td>
+						<td class="sort-car">MA 54321</td>
+						<td class="sort-trailer">MA 87654</td>
+						<td class="sort-phone" data-date="1546016381">234 567 890</td>
+						<td class="sort-idcard">78901</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					</tbody>
+                  </table>
+                </div>
+              </div>
+           
+                      </div>
+                    </div>
+                    <!-- Content of card #1 -->
+                    <div id="tab-top-1" class="card tab-pane active show" role="tabpanel">
+                      <div class="card-body">
+					  <h1>Speedy Transport Sp. z o.o.</h1>
+                            <br><br>                  </div>
+                    </div>
+                    <!-- Content of card #3 -->
+                    <div id="tab-top-3" class="card tab-pane " role="tabpanel">
+                      <div class="card-body">
+                         <div class="card-body">
+                <div id="table-default" class="table-responsive">
+                  <table class="table border 1px solid gray">
+                    <thead>
+                      <tr>
+                        <th><button class="table-sort desc" data-sort="sort-name">First name</button></th>
+                        <th><button class="table-sort" data-sort="sort-lastname">Last name</button></th>
+                        <th><button class="table-sort" data-sort="sort-car">Car plate</button></th>
+                        <th><button class="table-sort" data-sort="sort-trailer">Trailer plate</button></th>
+                        <th><button class="table-sort" data-sort="sort-phone">Phone number</button></th>
+                        <th><button class="table-sort" data-sort="sort-idcard">ID card</button></th>
+						<th><button class="table-sort" data-sort="sort-status">Status</button></th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-tbody"><tr>
+                        <td class="sort-name">Antoni</td>
+                        <td class="sort-lastname">Janiszewski</td>
+                        <td class="sort-car">KR 57341</td>
+                        <td class="sort-trailer">KR 87687</td>
+                        <td class="sort-phone" data-date="1546016360">543 654 765</td>
+                        <td class="sort-idcard">82342</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+                      </tr>
+					  <tr>
+						<td class="sort-name">Adam</td>
+						<td class="sort-lastname">Nowak</td>
+						<td class="sort-car">WA 12345</td>
+						<td class="sort-trailer">WA 54321</td>
+						<td class="sort-phone" data-date="1546016361">654 321 987</td>
+						<td class="sort-idcard">12345</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Katarzyna</td>
+						<td class="sort-lastname">Kowalska</td>
+						<td class="sort-car">LU 98765</td>
+						<td class="sort-trailer">LU 23456</td>
+						<td class="sort-phone" data-date="1546016362">789 456 123</td>
+						<td class="sort-idcard">67890</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Jan</td>
+						<td class="sort-lastname">Kowalczyk</td>
+						<td class="sort-car">PO 45678</td>
+						<td class="sort-trailer">PO 87654</td>
+						<td class="sort-phone" data-date="1546016363">321 654 987</td>
+						<td class="sort-idcard">45678</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Anna</td>
+						<td class="sort-lastname">Wójcik</td>
+						<td class="sort-car">GD 98765</td>
+						<td class="sort-trailer">GD 23456</td>
+						<td class="sort-phone" data-date="1546016364">987 654 321</td>
+						<td class="sort-idcard">34567</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Piotr</td>
+						<td class="sort-lastname">Lewandowski</td>
+						<td class="sort-car">PO 65432</td>
+						<td class="sort-trailer">PO 23456</td>
+						<td class="sort-phone" data-date="1546016365">456 789 123</td>
+						<td class="sort-idcard">23456</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Maria</td>
+						<td class="sort-lastname">Zielińska</td>
+						<td class="sort-car">LD 54321</td>
+						<td class="sort-trailer">LD 12345</td>
+						<td class="sort-phone" data-date="1546016366">654 987 321</td>
+						<td class="sort-idcard">89012</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Łukasz</td>
+						<td class="sort-lastname">Szymański</td>
+						<td class="sort-car">MZ 23456</td>
+						<td class="sort-trailer">MZ 76543</td>
+						<td class="sort-phone" data-date="1546016367">789 123 456</td>
+						<td class="sort-idcard">34567</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Magdalena</td>
+						<td class="sort-lastname">Dąbrowska</td>
+						<td class="sort-car">PO 76543</td>
+						<td class="sort-trailer">PO 98765</td>
+						<td class="sort-phone" data-date="1546016368">321 456 789</td>
+						<td class="sort-idcard">56789</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Marcin</td>
+						<td class="sort-lastname">Witkowski</td>
+						<td class="sort-car">KI 87654</td>
+						<td class="sort-trailer">KI 54321</td>
+						<td class="sort-phone" data-date="1546016369">987 321 654</td>
+						<td class="sort-idcard">67890</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					  </tr>
+					  <tr>
+						<td class="sort-name">Anna</td>
+						<td class="sort-lastname">Kowalczyk</td>
+						<td class="sort-car">PO 98765</td>
+						<td class="sort-trailer">PO 23456</td>
+						<td class="sort-phone" data-date="1546016370">654 321 098</td>
+						<td class="sort-idcard">54321</td>
+						<td class="sort-status"><b style="color:orange">🚚 W drodze</b></td>
+					</tr>
+					<tr>
+						<td class="sort-name">Marcin</td>
+						<td class="sort-lastname">Nowak</td>
+						<td class="sort-car">WI 54321</td>
+						<td class="sort-trailer">WI 98765</td>
+						<td class="sort-phone" data-date="1546016371">123 456 789</td>
+						<td class="sort-idcard">67890</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					<tr>
+						<td class="sort-name">Katarzyna</td>
+						<td class="sort-lastname">Wójcik</td>
+						<td class="sort-car">LU 87654</td>
+						<td class="sort-trailer">LU 54321</td>
+						<td class="sort-phone" data-date="1546016372">890 123 456</td>
+						<td class="sort-idcard">23456</td>
+						<td class="sort-status"><b style="color:orange">🚚 W drodze</b></td>
+					</tr>
+					<tr>
+						<td class="sort-name">Paweł</td>
+						<td class="sort-lastname">Kamiński</td>
+						<td class="sort-car">PO 76543</td>
+						<td class="sort-trailer">PO 12345</td>
+						<td class="sort-phone" data-date="1546016373">567 890 123</td>
+						<td class="sort-idcard">78901</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					<tr>
+						<td class="sort-name">Ewa</td>
+						<td class="sort-lastname">Jankowska</td>
+						<td class="sort-car">KR 65432</td>
+						<td class="sort-trailer">KR 98765</td>
+						<td class="sort-phone" data-date="1546016374">345 678 901</td>
+						<td class="sort-idcard">89012</td>
+						<td class="sort-status"><b style="color:orange">🚚 W drodze</b></td>
+					</tr>
+					<tr>
+						<td class="sort-name">Mateusz</td>
+						<td class="sort-lastname">Woźniak</td>
+						<td class="sort-car">PO 87654</td>
+						<td class="sort-trailer">PO 54321</td>
+						<td class="sort-phone" data-date="1546016375">678 901 234</td>
+						<td class="sort-idcard">12345</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					<tr>
+						<td class="sort-name">Magdalena</td>
+						<td class="sort-lastname">Kowal</td>
+						<td class="sort-car">MA 76543</td>
+						<td class="sort-trailer">MA 23456</td>
+						<td class="sort-phone" data-date="1546016376">901 234 567</td>
+						<td class="sort-idcard">67890</td>
+						<td class="sort-status"><b style="color:orange">🚚 W drodze</b></td>
+					</tr>
+					<tr>
+						<td class="sort-name">Grzegorz</td>
+						<td class="sort-lastname">Zając</td>
+						<td class="sort-car">PO 43210</td>
+						<td class="sort-trailer">PO 98765</td>
+						<td class="sort-phone" data-date="1546016377">234 567 890</td>
+						<td class="sort-idcard">34567</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					<tr>
+						<td class="sort-name">Natalia</td>
+						<td class="sort-lastname">Kaczmarek</td>
+						<td class="sort-car">WA 87654</td>
+						<td class="sort-trailer">WA 54321</td>
+						<td class="sort-phone" data-date="1546016378">567 890 123</td>
+						<td class="sort-idcard">45678</td>
+						<td class="sort-status"><b style="color:orange">🚚 W drodze</b></td>
+					</tr>
+					<tr>
+						<td class="sort-name">Michał</td>
+						<td class="sort-lastname">Grabowski</td>
+						<td class="sort-car">KR 98765</td>
+						<td class="sort-trailer">KR 23456</td>
+						<td class="sort-phone" data-date="1546016379">789 012 345</td>
+						<td class="sort-idcard">56789</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					<tr>
+						<td class="sort-name">Karolina</td>
+						<td class="sort-lastname">Michalska</td>
+						<td class="sort-car">PO 65432</td>
+						<td class="sort-trailer">PO 98765</td>
+						<td class="sort-phone" data-date="1546016380">890 123 456</td>
+						<td class="sort-idcard">67890</td>
+						<td class="sort-status"><b style="color:orange">🚚 W drodze</b></td>
+					</tr>
+					<tr>
+						<td class="sort-name">Tomasz</td>
+						<td class="sort-lastname">Olszewski</td>
+						<td class="sort-car">MA 54321</td>
+						<td class="sort-trailer">MA 87654</td>
+						<td class="sort-phone" data-date="1546016381">234 567 890</td>
+						<td class="sort-idcard">78901</td>
+						<td class="sort-status"><b style="color:green">✔ Dostępny</b></td>
+					</tr>
+					</tbody>
+                  </table>
+                </div>
+              </div>
+           
+                      </div>
+                    </div>
+                    <!-- Content of card #4 -->
+                    <div id="tab-top-4" class="card tab-pane" role="tabpanel">
+                      <div class="card-body">
+					  <div id="table-default" class="table-responsive">
+                  <table class="table border 1px solid gray">
+                    <thead>
+                      <tr>
+                        <th><button class="table-sort desc" data-sort="sort-name">Name</button></th>
+                        <th><button class="table-sort" data-sort="sort-country">Country</button></th>
+                        <th><button class="table-sort" data-sort="sort-city">City</button></th>
+                        <th><button class="table-sort" data-sort="sort-zipcode">Zipcode</button></th>
+                        <th><button class="table-sort" data-sort="sort-street">Street</button></th>
+                        <th><button class="table-sort" data-sort="sort-number">Number</button></th>
+						<th><button class="table-sort" data-sort="sort-phone">Phone</button></th>
+						<th><button class="table-sort" data-sort="sort-email">Email</button></th>
+						<th><button class="table-sort" data-sort="sort-status">Status</button></th>
+						<th><button class="table-sort" data-sort="sort-blocked">Is blocked</button></th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-tbody"><tr>
+                        <td class="sort-name"></td>
+                        <td class="sort-country">Niemcy</td>
+                        <td class="sort-city">Berlin</td>
+                        <td class="sort-zipcode"></td>
+                        <td class="sort-street" data-date="1546016360"></td>
+                        <td class="sort-number"></td>
+						<td class="sort-phone"></td>
+						<td class="sort-email"></td>
+						<td class="sort-status"></td>
+						<td class="sort-blocked"></td>
+                      </tr>
+					</tbody>
+                  </table>
+                </div>
+                      </div>
+                    </div>
+					<div id="tab-top-5" class="card tab-pane" role="tabpanel">
+                      <div class="card-body">
+                        <table class="table border 1px solid gray">
+                    <thead>
+                      <tr>
+                        <th><button class="table-sort" data-sort="sort-date">Date</button></th>
+                        <th><button class="table-sort" >Download</button></th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-tbody"><tr>
+                        <td class="sort-date">2.02.2024</td>
+                        <td class="sort-city"><button>download</button></td>
+                        
+                      </tr>
+					</tbody>
+                  </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    </div>
+	
+	<script>
+      document.addEventListener("DOMContentLoaded", function() {
+      const list = new List('table-default', {
+      	sortClass: 'table-sort',
+      	listClass: 'table-tbody',
+      	valueNames: [ 'sort-name', 'sort-type', 'sort-city', 'sort-score',
+      		{ attr: 'data-date', name: 'sort-date' },
+      		{ attr: 'data-progress', name: 'sort-pro' },
+      		'sort-quantity'
+      	]
+      });
+      })
+    </script>
+	
+    <!-- Libs JS -->
+	<script src="./dist/libs/list.js/dist/list.min.js?1684106062" defer=""></script>
+    <!-- Tabler Core -->
+    <script src="./dist/js/tabler.min.js?1684106062" defer></script>
+    <script src="./dist/js/demo.min.js?1684106062" defer></script>
+  </body>
+</html>
