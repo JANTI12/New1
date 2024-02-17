@@ -1,0 +1,692 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta19
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Lista zleceń</title>
+    <!-- CSS files -->
+    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
+    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet"/>
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+	  
+	  
+	  .button1 {
+		background-color: rgb(51, 51, 238); color: white; padding: 5px 10px; border: none; cursor: pointer; margin:10px
+	  }
+	  
+	  .card{height:100%}
+	  
+	  
+	  
+		.selection-window {
+			background-color: #fff;
+			padding: 1px;
+			border: 1px solid #ccc;
+			margin: 1px 0px;
+			border-radius: 5px;
+			display:inline-flex;
+			width:calc(100% - 0px);
+			font-size:14px;
+			height:100%;
+			 background-color:#eeeeff
+		}
+		
+		.selection-window-2 {
+			background-color: #fff;
+			padding: 5px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+			width:calc(100% - 0px);
+			font-size:20px;
+			height:100%;
+		}
+		
+		.inline {
+			display:inline-flex;
+			padding:5px;
+		}
+		
+		.title {
+			color: #bbb;
+			font-size: 11px;
+		}
+		
+		.card {		
+			width:100%;
+			display:inline-block;
+			font-size:0
+		}
+		.pad {
+			padding:7px 8px;
+		}
+		
+		.b {
+			border:2px solid red;
+		}
+    </style>
+	
+	<script>
+		t = ['a','b','c','d','e']
+		lista = ['k','t','e','f','a']
+		sections = [["t1",3],["t2",2]]
+		function add(){
+		var html = ''
+			let k = 0;
+			var abc = document.getElementById("modal-card")
+			for (let j = 0; j < sections.length; j++){	
+				html += '<div class="modal-title">' + sections[j][0] + '</div>';
+				html += '<table style="width:100%">';
+				for(let i = 0; i < sections[j][1]; i++){
+					html += '<tr>';
+					html += '<td class="datagrid-title" style="width:30%">' + t[k+i] + '</td>';
+					html += '<td>' + lista[k+i] + '</td>';
+					html += '</tr>';
+				}
+				html += '</table><br>';
+				k += sections[j][1];
+			}
+			abc.innerHTML = html;
+		}	
+
+
+
+		function innerZal(){
+		var longHTML = `<div class="container-xl" style="margin-bottom:20px;">
+		<div style="position:relative; left:20px; bottom:-30px; text-align:right "><i  class="fa-solid fa-trash" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='black'" onclick="usun(this)"></i></div>
+		<div class="card row" style="padding:0px; ">
+		
+			<div class="col-md-6 inline " style="height:100%; justify-content: top">
+				<div class="selection-window row inline" style="height:100%">
+					<div style="padding:6px 15px"><b>Informacje ogólne o załadunku</b></div>	
+					
+					<div class="col-md-7 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Wybierz kraj załadunku</div>
+							<select class="form-select form-control" style="border:none; width:100%">
+								<option value="1">Albania</option>
+								<option value="2">Polska</option>
+								<option value="3">Niemcy</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-5 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Kod miasta</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-8 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Miejscowość</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-9 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Nazwa ulicy</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-3 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Numer domu</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-4 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Data załadunku</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-4 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Godzina załadunku</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-4 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Czas załadunku</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					
+					
+				</div>
+				
+			</div>
+			<div class="col-md-6 inline" style="height:100%; justify-content: top">
+				<div class="selection-window row inline" style="height:100%">
+					<div style="padding:6px 15px"><b>Informacje szczegółowe o załadunku</b></div>
+					<div class="col-md-8 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Osoba odpowiedzialna za załadunek</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-4 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Numer telefonu</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-5 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Rodzaj ładunku</div>
+							<select class="form-select form-control" style="border:none; width:100%">
+								  <option value="">Wybierz rodzaj ładunku</option>
+								  <option value="Palety drewniane">Palety drewniane</option>
+								  <option value="Kontenery morskie">Kontenery morskie</option>
+								  <option value="Cysterny">Cysterny</option>
+								  <option value="Pojazdy">Pojazdy</option>
+								  <option value="Kontenery chłodnicze">Kontenery chłodnicze</option>
+								  <option value="Paczki i paczki">Paczki i paczki</option>
+								  <option value="Produkty chemiczne">Produkty chemiczne</option>
+								  <option value="Żywe zwierzęta">Żywe zwierzęta</option>
+								  <option value="Materiały budowlane">Materiały budowlane</option>
+								  <option value="Produkty spożywcze">Produkty spożywcze</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-7 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Waga ładunku</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-8 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Numer referencyjny</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-4 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Wartość ładunku</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-12 pad">
+						<div class="selection-window-2">
+						<div class="title" style="margin-bottom:5px"> Dodatkowe informacje</div>
+							<textarea rows="1" class="form-control" placeholder=". . ." value="Mike"></textarea>
+						</div>
+					</div>
+					
+					<!--<div class="col-md-12 pad">
+						<div class="selection-window-2">
+						<div class="title" style="margin-bottom:5px"> Dodatkowe informacje</div>
+							<textarea rows="5" class="form-control" placeholder=". . ." value="Mike"></textarea>
+						</div>
+					</div>-->
+				</div>
+			</div>
+		
+		</div><hr>
+	</div>
+	
+		`
+			document.getElementById("a").insertAdjacentHTML('beforeend', longHTML);
+			}
+			
+			
+	function usun(element){
+		var rodzic1 = element.parentNode;
+        var rodzic2 = rodzic1.parentNode;
+            
+        rodzic2.remove();
+	}
+	
+	function innerRoz(){
+		var longHTML = `<div class="container-xl" style="margin-bottom:20px;">
+		<div style="position:relative; left:20px; bottom:-30px; text-align:right "><i  class="fa-solid fa-trash" onmouseover="this.style.color='#aaa'" onmouseout="this.style.color='black'" onclick="usun(this)"></i></div>
+		<div class="card row" style="padding:0px; ">
+		
+			<div class="col-md-6 inline " style="height:100%; justify-content: top">
+				<div class="selection-window row inline" style="height:100%">
+					<div style="padding:6px 15px"><b>Informacje ogólne o rozładunku</b></div>	
+					
+					<div class="col-md-7 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Wybierz kraj rozładunku</div>
+							<select class="form-select form-control" style="border:none; width:100%">
+								<option value="1">Niemcy</option>
+								<option value="2">Polska</option>
+								<option value="3">Bułgaria</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-5 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Kod miasta</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-8 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Miejscowość</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-9 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Nazwa ulicy</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-3 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Numer domu</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-4 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Data rozładunku</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-4 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Godzina rozładunku</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-4 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Czas rozładunku</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					
+					
+				</div>
+				
+			</div>
+			<div class="col-md-6 inline" style="height:100%; justify-content: top">
+				<div class="selection-window row inline" style="height:100%">
+					<div style="padding:6px 15px"><b>Informacje szczegółowe o rozładunku</b></div>
+					<div class="col-md-8 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Osoba odpowiedzialna za rozładunek</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-4 pad">
+						<div class="selection-window-2">
+							<div class="title" style=""> Numer telefonu</div>
+							<input type="text" class="form-control" style="border:none">
+						</div>
+					</div>
+					<div class="col-md-12 pad">
+						<div class="selection-window-2">
+						<div class="title" style="margin-bottom:5px"> Instrukcje specjalne</div>
+							<textarea rows="2" class="form-control" placeholder=". . ." value="Mike"></textarea>
+						</div>
+					</div>
+					<div class="col-md-12 pad">
+						<div class="selection-window-2">
+						<div class="title" style="margin-bottom:5px"> Dodatkowe informacje</div>
+							<textarea rows="3" class="form-control" placeholder=". . ." value="Mike"></textarea>
+						</div>
+					</div>
+					<!--<div class="col-md-12 pad">
+						<div class="selection-window-2">
+						<div class="title" style="margin-bottom:5px"> Dodatkowe informacje</div>
+							<textarea rows="5" class="form-control" placeholder=". . ." value="Mike"></textarea>
+						</div>
+					</div>-->
+				</div>
+			</div>
+		
+		</div>
+		<hr >
+	</div>
+	
+		`
+			document.getElementById("a").insertAdjacentHTML('beforeend', longHTML);
+			}
+	</script>
+	
+	
+	</head>
+	
+	<header class="navbar-expand-md">
+        <div class="collapse navbar-collapse" id="navbar-menu">
+          <div class="navbar">
+            <div class="container-xl">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l-2 0l9 -9l9 9l-2 0"></path><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Home
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5"></path><path d="M12 12l8 -4.5"></path><path d="M12 12l0 9"></path><path d="M12 12l-8 -4.5"></path><path d="M16 5.25l-8 4.5"></path></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Transport companies
+                    </span>
+                  </a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 11l3 3l8 -8"></path><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"></path></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Completed transports
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link " href="">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Active transports
+                    </span>
+                  </a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path><path d="M4 13m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path><path d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path><path d="M14 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Customers
+                    </span>
+                  </a>
+                  </li>
+              </ul>
+              <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+                <form action="./" method="get" autocomplete="off" novalidate="">
+                  <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                    </span>
+                    <input type="text" value="" class="form-control" placeholder="Search…" aria-label="Search in website">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+	
+	<br>
+	<div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">
+                  Dodaj nowy ładunek
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+	<body >
+	
+	<div class="page-body" id="a">
+		<div class="container-xl" style="margin-bottom:20px;">
+			<div class="card row" style="padding:0px; ">
+				<div class="col-md-6 inline " style="height:100%; justify-content: top">
+					<div class="selection-window row inline" style="height:100%">
+						<div style="padding:6px 15px"><b>Informacje płatnicze ładunku</b></div>	
+						<div class="col-md-12 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Wybierz firmę</div>
+								<select class="form-select form-control" style="border:none; width:100%">
+									<option value="1">Speedy Transport Sp. z o.o.</option>
+									<option value="2">Express Logistics Sp. J.</option>
+									<option value="3">Global Cargo Solutions Ltd.</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Wybierz kwotę frachtu</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Wybierz walutę</div>
+								<select class="form-select form-control" style="border:none; width:100%">
+									<option value="1">PLN</option>
+									<option value="2">USD</option>
+									<option value="3">BTC</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Okres płatności</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="col-md-6 inline" style="height:100%; justify-content: top">
+					<div class="selection-window row inline" style="height:100%">
+						<div style="padding:6px 15px"><b>Informacje ogólne o ładunku</b></div>
+						<div class="col-md-6 pad">
+							<div class="selection-window-2">
+								<div class="title" style="">Status ładunku</div>
+								<select class="form-select form-control" style="border:none; width:100%">
+									<option value="1">Oczekujący</option>
+									<option value="2">Aktywny</option>
+									<option value="3">Zakończony</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Data rozpoczęcia przewozu</div>
+								<div class="input-icon">
+								  <span class="input-icon-addon"><!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
+									<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
+								  </span>
+								  <input class="form-control" placeholder="Select a date" id="datepicker-icon-prepend" value="2020-06-20" style="border:none">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 pad">
+							<div class="selection-window-2">
+								<div class="title" style="">Kierowca pojazdu</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<!--<div class="col-md-12 pad">
+							<div class="selection-window-2">
+							<div class="title" style="margin-bottom:5px"> Dodatkowe informacje</div>
+								<textarea rows="5" class="form-control" placeholder=". . ." value="Mike"></textarea>
+							</div>
+						</div>-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="container-xl" style="margin-bottom:20px;">
+		
+			<div class="card row" style="padding:0px; ">
+				<div class="col-md-6 inline " style="height:100%; justify-content: top">
+					<div class="selection-window row inline" style="height:100%">
+						<div style="padding:6px 15px"><b>Informacje ogólne o załadunku</b></div>	
+						
+						<div class="col-md-7 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Wybierz kraj załadunku</div>
+								<select class="form-select form-control" style="border:none; width:100%">
+									<option value="1">Albania</option>
+									<option value="2">Polska</option>
+									<option value="3">Czechy</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-5 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Kod miasta</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-8 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Miejscowość</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-9 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Nazwa ulicy</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-3 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Numer domu</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Data załadunku</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Godzina załadunku</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Czas załadunku</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="col-md-6 inline" style="height:100%; justify-content: top">
+					<div class="selection-window row inline" style="height:100%">
+						<div style="padding:6px 15px"><b>Informacje szczegółowe o załadunku</b></div>
+						<div class="col-md-8 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Osoba odpowiedzialna za załadunek</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Numer telefonu</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-5 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Rodzaj ładunku</div>
+								<select class="form-select form-control" style="border:none; width:100%">
+									  <option value="">Wybierz rodzaj ładunku</option>
+									  <option value="Palety drewniane">Palety drewniane</option>
+									  <option value="Kontenery morskie">Kontenery morskie</option>
+									  <option value="Cysterny">Cysterny</option>
+									  <option value="Pojazdy">Pojazdy</option>
+									  <option value="Kontenery chłodnicze">Kontenery chłodnicze</option>
+									  <option value="Paczki i paczki">Paczki i paczki</option>
+									  <option value="Produkty chemiczne">Produkty chemiczne</option>
+									  <option value="Żywe zwierzęta">Żywe zwierzęta</option>
+									  <option value="Materiały budowlane">Materiały budowlane</option>
+									  <option value="Produkty spożywcze">Produkty spożywcze</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-7 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Waga ładunku</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-8 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Numer referencyjny</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Wartość ładunku</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-12 pad">
+							<div class="selection-window-2">
+							<div class="title" style="margin-bottom:5px"> Dodatkowe informacje</div>
+								<textarea rows="1" class="form-control" placeholder=". . ." value="Mike"></textarea>
+							</div>
+						</div>
+						
+						<!--<div class="col-md-12 pad">
+							<div class="selection-window-2">
+							<div class="title" style="margin-bottom:5px"> Dodatkowe informacje</div>
+								<textarea rows="5" class="form-control" placeholder=". . ." value="Mike"></textarea>
+							</div>
+						</div>-->
+					</div>
+				</div>
+			
+			</div>
+		</div>
+		<hr>
+	</div>
+	
+	<footer ><h1 style="padding-bottom:20px; text-align:center" class="">
+	<button onclick="innerZal()" class=" btn btn-outline-primary" >Dodaj załadunek</button>
+	<button onclick="innerRoz()" class=" btn btn-outline-primary" >Dodaj rozładunek</button>
+	</h1></footer>
+	
+	
+	
+	</body>
+	
+	
+  </html>
