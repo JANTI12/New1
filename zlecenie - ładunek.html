@@ -9,7 +9,7 @@
 -->
 <html lang="en">
   <head>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
@@ -48,7 +48,7 @@
     margin: 1px 0px;
     border-radius: 5px;
     font-size: 14px;
-    background-color: #dde;
+    background-color: #afa;
 }
 
 .selection-window-2 {
@@ -96,33 +96,27 @@
     </style>
 	
 	<script>
-		t = ['a','b','c','d','e']
-		lista = ['k','t','e','f','a']
-		sections = [["t1",3],["t2",2]]
+		t = []
+		lista = []
+		sections = []
 		function add(){
 		var html = ''
 			let k = 0;
-			var abc = document.getElementById("modal-card")
+			var abc = document.getElementById("podsumowanie")
 			for (let j = 0; j < sections.length; j++){	
 				html += '<div class="modal-title">' + sections[j][0] + '</div>';
-				html += '<table style="width:100%">';
+				html += '<table style="width:100%" class="">';
 				for(let i = 0; i < sections[j][1]; i++){
 					html += '<tr>';
-					html += '<td class="datagrid-title" style="width:30%">' + t[k+i] + '</td>';
+					html += '<td class="datagrid-title" style="width:30%; height:20px;">' + t[k+i] + '</td>';
 					html += '<td>' + lista[k+i] + '</td>';
 					html += '</tr>';
 				}
-				html += '</table><br>';
+				html += '</table><br><br>';
 				k += sections[j][1];
 			}
-			abc.innerHTML = html;
+			abc.innerHTML += html;
 		}	
-		
-		function kjh(){
-			var elements = document.querySelectorAll(".selection-window-2");
-			console.log(elements[2].value);
-console.log(document.getElementById("rtyrty").textContent)			
-		}
 		
 		var idI = ["c1","c2","c3","c4"]
 		var k = -1;
@@ -137,10 +131,79 @@ console.log(document.getElementById("rtyrty").textContent)
 			k++
 			if (k==3){
 				document.getElementById("dalej").textContent = "Zakończ";
+				check();
+				add();
 			}
 			if (k==4){
 				document.getElementById("dalej").style.display = "none";
+				
 			}
+		}
+		
+		function check(){
+			var containers = document.querySelectorAll('.selection-window');
+
+			// Iteruj przez każdy kontener
+			containers.forEach(function(container) {
+				// Dla każdego kontenera znajdź wszystkie podrzędne elementy o klasie "selection-window-2"
+				var elements = container.querySelectorAll('.selection-window-2');
+				var titleDivs = container.querySelectorAll('div[style="padding:6px 15px"] b');
+				console.log(titleDivs[0]);
+				var licznik = 0;
+				
+				// Iteruj przez każdy znaleziony element w kontenerze
+				elements.forEach(function(element) {
+					// Pobierz pierwszy element div wewnątrz bieżącego elementu
+					var divElement = element.querySelector('div');
+					
+					if (divElement) {
+						// Odczytaj textContent pierwszego elementu div
+						var divTextContent = divElement.textContent;
+						console.log('Tekst elementu div:', divTextContent);
+						t.push(divTextContent);
+						licznik++;
+					}
+					
+					// Pobierz pierwszy input lub select wewnątrz bieżącego elementu
+					var inputOrSelect = element.querySelector('input, select, textarea, form');
+					
+					if (inputOrSelect) {
+						// Odczytaj wartość pierwszego inputu lub selecta
+						var value = inputOrSelect.value;
+						console.log('Wartość inputu/selecta:', value);
+						lista.push(value);
+					}
+				});
+				if (titleDivs[0].textContent != "Informacje szczegółowe o załadunku" || titleDivs[0].textContent != "Informacje szczegółowe o rozładunku"){
+				sections.push([titleDivs[0].textContent, licznik]);
+				} else {
+				sections[sections.length-1][1] += licznik;
+				}
+			});
+		
+		
+		
+			var elements = document.querySelectorAll('.selection-window-2');
+			// Iteruj przez każdy element
+			elements.forEach(function(element) {
+				// Pobierz pierwszy element div wewnątrz bieżącego elementu
+				var divElement = element.querySelector('div');
+				
+				if (divElement) {
+					// Odczytaj textContent pierwszego elementu div
+					var divTextContent = divElement.textContent;
+					console.log('Tekst elementu div:', divTextContent);
+				}
+				
+				// Pobierz pierwszy input lub select wewnątrz bieżącego elementu
+				var inputOrSelect = element.querySelector('input, select, textarea, form');
+				
+				if (inputOrSelect) {
+					// Odczytaj wartość pierwszego inputu lub selecta
+					var value = inputOrSelect.value;
+					console.log('Wartość inputu/selecta:', value);
+				}
+			});
 		}
 	</script>
 	
@@ -284,6 +347,125 @@ console.log(document.getElementById("rtyrty").textContent)
 		</div>
 		`
 		document.getElementById("c3").insertAdjacentHTML('beforeend', longHTML);
+		document.getElementById("buttons").remove();
+		var longHTML = `
+			<footer style="text-align:center; margin-top:40px; bottom:20px" id="buttons">
+		<button onclick="innerZal()" class=" btn btn-outline-primary" > Dodaj załadunek </button>
+		<button onclick="innerRoz()" class=" btn btn-outline-primary" > Dodaj rozładunek</button>
+		</footer>`
+		document.getElementById("c3").insertAdjacentHTML('beforeend', longHTML);
+		}
+		
+		
+		function innerRoz(){
+			var longHTML = ` <br>
+			<div class="container-xl n">
+
+			
+			<div class="row" style="display:flex; flex-direction:row; height:100%; width:100%; background-color:#fff; border:1px solid #ddd; padding:8px; border-radius:5px">
+				<div class=" col-md-6" style="">
+					<div class="selection-window" style="height:100%">
+					<div class="row inline">
+						<div style="padding:6px 15px"><b>Informacje ogólne o rozładunku</b></div>	
+						
+						<div class="col-md-7 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Wybierz kraj załadunku</div>
+								<select class="form-select form-control" style="border:none; width:100%">
+									<option value="1">Albania</option>
+									<option value="2">Polska</option>
+									<option value="3">Czechy</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-5 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Kod miasta</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-8 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Miejscowość</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-9 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Nazwa ulicy</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-3 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Numer domu</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Data rozładunku</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Godzina rozładunku</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Czas rozładunku</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+					</div>	
+					</div>
+				</div>
+				<div class=" col-md-6 " style="">
+					<div class="selection-window " style="height:100%">
+					<div class="row inline">
+						<div style="padding:6px 15px"><b>Informacje szczegółowe o rozładunku</b></div>
+						<div class="col-md-8 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Osoba odpowiedzialna za rozładunek</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-4 pad">
+							<div class="selection-window-2">
+								<div class="title" style=""> Numer telefonu</div>
+								<input type="text" class="form-control" style="border:none">
+							</div>
+						</div>
+						<div class="col-md-12 pad">
+							<div class="selection-window-2">
+							<div class="title" style="margin-bottom:5px"> Dodatkowe informacje</div>
+								<textarea rows="9" class="form-control" placeholder=". . ." value="Mike"></textarea>
+							</div>
+						</div>
+						
+						<!--<div class="col-md-12 pad">
+							<div class="selection-window-2">
+							<div class="title" style="margin-bottom:5px"> Dodatkowe informacje</div>
+								<textarea rows="5" class="form-control" placeholder=". . ." value="Mike"></textarea>
+							</div>
+						</div>-->
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		`
+		document.getElementById("c3").insertAdjacentHTML('beforeend', longHTML);
+		document.getElementById("buttons").remove();
+		var longHTML = `
+			<footer style="text-align:center; margin-top:40px; bottom:20px" id="buttons">
+		<button onclick="innerZal()" class=" btn btn-outline-primary" > Dodaj załadunek </button>
+		<button onclick="innerRoz()" class=" btn btn-outline-primary" > Dodaj rozładunek</button>
+		</footer>`
+		document.getElementById("c3").insertAdjacentHTML('beforeend', longHTML);
 		}
 	</script>
 	</head>
@@ -373,7 +555,7 @@ console.log(document.getElementById("rtyrty").textContent)
             </div>
           </div>
         </div>
-	<body >
+	<body id="body">
 	<script src="./dist/js/demo-theme.min.js?1684106062"></script>
 	
 	<div class="page-body">
@@ -484,9 +666,9 @@ console.log(document.getElementById("rtyrty").textContent)
 								<div class="selection-window-2">
 									<div class="title" style=""> Wybierz walutę</div>
 									<select class="form-select form-control" style="border:none; width:100%" >
-										<option value="1">PLN</option>
-										<option value="2">USD</option>
-										<option value="3">BTC</option>
+										<option value="PLN">PLN</option>
+										<option value="USD">USD</option>
+										<option value="BTC">BTC</option>
 									</select>
 								</div>
 							</div>
@@ -514,16 +696,16 @@ console.log(document.getElementById("rtyrty").textContent)
 							</div>
 							<div class="col-md-6 pad">
 								<div class="selection-window-2">
-									<div class="title" style="">Masa</div>
-									<input type="text" class="form-control" style="border:none">
+									<div class="title" style="" id="rtyrty">Masa</div>
+									<input type="text" class="form-control " style="border:none">
 								</div>
 							</div>
 							<div class="col-md-6 pad">
 								<div class="selection-window-2">
 									<div class="title" style="">Wymiana palet?</div>
-									<select class="form-select form-control" style="border:none; width:100%" id="rtyrty">
-										<option value="1">Tak</option>
-										<option value="2">Nie</option>
+									<select class="form-select form-control" style="border:none; width:100%" >
+										<option value="tak">Tak</option>
+										<option value="nie">Nie</option>
 									</select>
 								</div>
 							</div>
@@ -808,15 +990,15 @@ console.log(document.getElementById("rtyrty").textContent)
 				</div>
 			</div>
 		</div>
-		<br>
-		<div style="text-align:center; margin-top:40px; bottom:20px">
-		<button onclick="innerZal()" class=" btn btn-outline-primary" >Dodaj załadunek </button>
-		<button onclick="innerRoz()" class=" btn btn-outline-primary" >Dodaj rozładunek</button>
-		</div>
+		<footer style="text-align:center; margin-top:40px; bottom:20px" id="buttons">
+		<button onclick="innerZal()" class=" btn btn-outline-primary" > Dodaj załadunek </button>
+		<button onclick="innerRoz()" class=" btn btn-outline-primary" > Dodaj rozładunek</button>
+		</footer>
 	</div>
 	
 	<div id="c4" style="display:none">
-		<div class="container-xl n">
+		
+		<div class="container-xl n" >
 			<div class="card-body">
                 <ul class="steps steps-green steps-counter my-4">
 					<li class="step-item">Wybierz kontrahenta</li>
@@ -825,146 +1007,18 @@ console.log(document.getElementById("rtyrty").textContent)
                     <li class="step-item active">Podsumowanie </li>
                 </ul>
             </div>
-			
-			<div class="row" style="display:flex; flex-direction:row; height:100%; width:100%; background-color:#fff; border:1px solid #ddd; padding:8px; border-radius:5px">
-				<div class=" col-md-6" style="">
-					<div class="selection-window" style="height:100%">
-					<div class="row inline">
-						<div style="padding:6px 15px"><b>Informacje ogólne o załadunku</b></div>	
-						
-						<div class="col-md-7 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Wybierz kraj załadunku</div>
-								<select class="form-select form-control" style="border:none; width:100%">
-									<option value="1">Albania</option>
-									<option value="2">Polska</option>
-									<option value="3">Czechy</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-5 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Kod miasta</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-						<div class="col-md-8 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Miejscowość</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-						<div class="col-md-9 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Nazwa ulicy</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-						<div class="col-md-3 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Numer domu</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-						<div class="col-md-4 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Data załadunku</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-						<div class="col-md-4 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Godzina załadunku</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-						<div class="col-md-4 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Czas załadunku</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-					</div>	
-					</div>
-				</div>
-				<div class=" col-md-6 " style="">
-					<div class="selection-window " style="height:100%">
-					<div class="row inline">
-						<div style="padding:6px 15px"><b>Informacje szczegółowe o załadunku</b></div>
-						<div class="col-md-8 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Osoba odpowiedzialna za załadunek</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-						<div class="col-md-4 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Numer telefonu</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-						<div class="col-md-5 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Rodzaj ładunku</div>
-								<select class="form-select form-control" style="border:none; width:100%">
-									  <option value="">Wybierz rodzaj ładunku</option>
-									  <option value="Palety drewniane">Palety drewniane</option>
-									  <option value="Kontenery morskie">Kontenery morskie</option>
-									  <option value="Cysterny">Cysterny</option>
-									  <option value="Pojazdy">Pojazdy</option>
-									  <option value="Kontenery chłodnicze">Kontenery chłodnicze</option>
-									  <option value="Paczki i paczki">Paczki i paczki</option>
-									  <option value="Produkty chemiczne">Produkty chemiczne</option>
-									  <option value="Żywe zwierzęta">Żywe zwierzęta</option>
-									  <option value="Materiały budowlane">Materiały budowlane</option>
-									  <option value="Produkty spożywcze">Produkty spożywcze</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-7 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Waga ładunku</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-						<div class="col-md-8 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Numer referencyjny</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-						<div class="col-md-4 pad">
-							<div class="selection-window-2">
-								<div class="title" style=""> Wartość ładunku</div>
-								<input type="text" class="form-control" style="border:none">
-							</div>
-						</div>
-						<div class="col-md-12 pad">
-							<div class="selection-window-2">
-							<div class="title" style="margin-bottom:5px"> Dodatkowe informacje</div>
-								<textarea rows="1" class="form-control" placeholder=". . ." value="Mike"></textarea>
-							</div>
-						</div>
-						
-						<!--<div class="col-md-12 pad">
-							<div class="selection-window-2">
-							<div class="title" style="margin-bottom:5px"> Dodatkowe informacje</div>
-								<textarea rows="5" class="form-control" placeholder=". . ." value="Mike"></textarea>
-							</div>
-						</div>-->
-					</div>
-					</div>
-				</div>
+			<div class="" style=" background-color:#fff; border:1px solid #ddd; padding:30px; border-radius:5px; margin:20px" id="podsumowanie">
 			</div>
 		</div>
+		
 	</div>
 	
 	</div>
 	
 	
-	<footer ><h1 style="padding-bottom:20px; text-align:center" class="">
+	<footer ><h1 style="padding-bottom:20px; display:flex; justify-content:flex-end;" class="">
 	
-	<button onclick="next(0)" class="btn  btn-outline-success" style="margin-top:20px; position:absolute; right:70px; margin:40px" id="dalej">Przejdź dalej</button>
+	<button onclick="next(0)" class="btn  btn-outline-success" style="margin-top:20px; margin:40px; " id="dalej">Przejdź dalej</button>
 	</h1></footer>
 	
 	<script src="./dist/libs/dropzone/dist/dropzone-min.js?1684106062" defer=""></script>
